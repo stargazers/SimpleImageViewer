@@ -1,0 +1,65 @@
+Simple Image Viewer
+====================
+
+	Overview
+	=========
+
+		Simple image viewer is created for my personal usage and
+		it does not very much. Just what I need ;)
+
+		Reason why I wrote siv is simple: I tried to make a bash 
+		script what will just use CURL to download image, then use 
+		some imageviewer to load that image, then sleep couple of seconds, 
+		then load another image and then just show that image.
+
+		There was a problem. I didn't find any smart way to change
+		image to image viewer what was already open. I tried couple of
+		Image Viewers, but I didn't made them work as I wanted. 
+
+		In one image viewer there was a "refresh" command what took
+		argument that how many seconds it should wait until refresh.
+		Well, that didn't made the trick for my usage, because I never
+		knew how long image will be loaded until it is loaded. 
+		
+		So I tried another image viewer. There was automatically reload if
+		image has changed. Well, that left halfly loaded images in UI
+		because curl was writing to that file and image was redrawn
+		couple of times, but still that was broken in UI when download
+		of image was complete. So, it didn't made what I need.
+
+		Then I tried to find an application what can take "load" command
+		from CLI to already running instance of that application, so
+		I do not need to do "killall" and "some_image_viewer_here image.jpg"
+		every time when I download new image and overwrite the old one.
+		Also, I didn't want to press any button to "refresh" image, because
+		I want that I can make a script what does that for me.
+
+		So, then I just decided to write this kind of application if
+		I can, and I made it as good as I needed. This is _not_ tested
+		well, there might be memory leaks, it might crash the whole universe
+		but I don't care. If you find bugs, send me patches or at least
+		send me a mail and just tell if there is any fatal. I might or
+		might not fix it.
+
+	Usage
+	======
+
+		You can load image with CLI parameter:
+			./siv /tmp/yourimage.jpg
+
+		When you have SIV running, you can load another image typing
+		in CLI this:
+			echo "load /tmp/some_image.jpg" > /tmp/iv_fifo
+
+		You can toggle fullscreen using key "f" and/or via FIFO:
+			echo "fullscreen" > /tmp/iv_fifo
+	
+	Contact
+	========
+
+	Aleksi Räsänen <aleksi.rasanen@runosydan.net>
+
+	License
+	========
+
+	GNU GPL 
